@@ -1,6 +1,10 @@
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import AdminLoginPage from './pages/admin/Login';
 import AdminDashboard from './pages/admin/Dashboard';
+import SymptomsPage from './pages/admin/Symptoms';
+import QuestionsPage from './pages/admin/Questions';
+import SyndromesPage from './pages/admin/Syndromes';
+import HerbsPage from './pages/admin/Herbs';
 import DiagnosisPage from './pages/Diagnosis';
 import ResultPage from './pages/Result';
 import TreatmentPage from './pages/Treatment';
@@ -17,6 +21,10 @@ function App() {
         {/* 관리자 라우트 */}
         <Route path="/admin/login" element={<AdminLoginPage />} />
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        <Route path="/admin/symptoms" element={<SymptomsPage />} />
+        <Route path="/admin/questions" element={<QuestionsPage />} />
+        <Route path="/admin/syndromes" element={<SyndromesPage />} />
+        <Route path="/admin/herbs" element={<HerbsPage />} />
       </Routes>
     </div>
   );
