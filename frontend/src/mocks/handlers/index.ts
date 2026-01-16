@@ -1,4 +1,6 @@
 import { http, HttpResponse } from 'msw';
+import { diagnosisHandlers } from './diagnosis';
+import { adminHandlers } from './admin';
 
 /**
  * MSW 핸들러
@@ -13,14 +15,9 @@ export const handlers = [
     });
   }),
 
-  // 진단 관련 핸들러는 contracts 완성 후 추가 예정
-  // 예시:
-  // http.post('/api/diagnosis', async ({ request }) => {
-  //   const body = await request.json();
-  //   return HttpResponse.json({
-  //     diagnosisId: 'test-diagnosis-id',
-  //     patternType: 'BLOOD_DEFICIENCY',
-  //     confidence: 0.85,
-  //   });
-  // }),
+  // 진단 API 핸들러
+  ...diagnosisHandlers,
+
+  // 관리자 API 핸들러
+  ...adminHandlers,
 ];

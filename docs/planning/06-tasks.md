@@ -160,7 +160,7 @@
 
 ---
 
-### [ ] Phase 0, T0.5.2: Backend 테스트 스켈레톤 (RED)
+### [x] Phase 0, T0.5.2: Backend 테스트 스켈레톤 (RED)
 
 **담당**: test-specialist
 
@@ -180,7 +180,7 @@
 
 ---
 
-### [ ] Phase 0, T0.5.3: Frontend MSW 핸들러 및 테스트 스켈레톤 (RED)
+### [x] Phase 0, T0.5.3: Frontend MSW 핸들러 및 테스트 스켈레톤 (RED)
 
 **담당**: test-specialist
 
