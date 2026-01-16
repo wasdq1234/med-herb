@@ -11,7 +11,7 @@ import AdminDashboard from '../../../pages/admin/Dashboard';
 import AdminNav from '../../../components/admin/AdminNav';
 import DataTable from '../../../components/admin/DataTable';
 import { useAdminStore } from '../../../stores/adminStore';
-import { mockSymptoms, mockAdminHerbs } from '../../../mocks/data/mockData';
+import { mockSymptoms } from '../../../mocks/data/mockData';
 
 /**
  * 테스트 래퍼
@@ -179,7 +179,7 @@ describe('DataTable', () => {
   const columns = [
     { key: 'name', label: '이름' },
     { key: 'category', label: '카테고리' },
-    { key: 'isActive', label: '활성', render: (value: boolean) => (value ? '활성' : '비활성') },
+    { key: 'isActive', label: '활성', render: (value: unknown) => (value ? '활성' : '비활성') },
   ];
 
   const mockOnEdit = vi.fn();

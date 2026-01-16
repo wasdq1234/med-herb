@@ -24,7 +24,7 @@ export default function ResultPage() {
   const [result, setResult] = useState<DiagnosisResult | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedSyndrome, setSelectedSyndrome] = useState<SyndromeResult | null>(null);
-  const [showTreatment, setShowTreatment] = useState(false);
+  const [showTreatment, _setShowTreatment] = useState(false);
 
   useEffect(() => {
     // 세션 ID가 없으면 진단 페이지로 리다이렉트

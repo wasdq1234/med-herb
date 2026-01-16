@@ -10,7 +10,7 @@ import { BrowserRouter } from 'react-router-dom';
 import ResultPage from '../../pages/Result';
 import SyndromeCard from '../../components/diagnosis/SyndromeCard';
 import EvidenceModal from '../../components/diagnosis/EvidenceModal';
-import { mockSyndromeResults, mockTreatmentAxes, mockHerbs } from '../../mocks/data/mockData';
+import { mockSyndromeResults } from '../../mocks/data/mockData';
 import { useDiagnosisStore } from '../../stores/diagnosisStore';
 
 /**

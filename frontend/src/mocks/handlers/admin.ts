@@ -182,7 +182,7 @@ const postSymptom = http.post(`${API_BASE}/symptoms`, async ({ request }) => {
   await delay(100);
   if (!checkAuth(request)) return unauthorizedResponse();
 
-  const body = await request.json();
+  const body = (await request.json()) as Record<string, unknown>;
   const newSymptom = {
     id: `sym-${Date.now()}`,
     ...body,
@@ -191,7 +191,7 @@ const postSymptom = http.post(`${API_BASE}/symptoms`, async ({ request }) => {
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   };
-  symptoms.push(newSymptom);
+  symptoms.push(newSymptom as typeof symptoms[0]);
 
   return HttpResponse.json({ success: true, data: newSymptom }, { status: 201 });
 });
@@ -203,12 +203,12 @@ const putSymptom = http.put(`${API_BASE}/symptoms/:id`, async ({ request, params
   const index = symptoms.findIndex((s) => s.id === params.id);
   if (index === -1) return notFoundResponse('증상');
 
-  const body = await request.json();
+  const body = (await request.json()) as Record<string, unknown>;
   symptoms[index] = {
     ...symptoms[index],
     ...body,
     updatedAt: new Date().toISOString(),
-  };
+  } as typeof symptoms[0];
 
   return HttpResponse.json({ success: true, data: symptoms[index] });
 });
@@ -265,7 +265,7 @@ const postQuestion = http.post(`${API_BASE}/questions`, async ({ request }) => {
   await delay(100);
   if (!checkAuth(request)) return unauthorizedResponse();
 
-  const body = await request.json();
+  const body = (await request.json()) as Record<string, unknown>;
   const newQuestion = {
     id: `q-${Date.now()}`,
     ...body,
@@ -274,7 +274,7 @@ const postQuestion = http.post(`${API_BASE}/questions`, async ({ request }) => {
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   };
-  questions.push(newQuestion);
+  questions.push(newQuestion as typeof questions[0]);
 
   return HttpResponse.json({ success: true, data: newQuestion }, { status: 201 });
 });
@@ -286,12 +286,12 @@ const putQuestion = http.put(`${API_BASE}/questions/:id`, async ({ request, para
   const index = questions.findIndex((q) => q.id === params.id);
   if (index === -1) return notFoundResponse('질문');
 
-  const body = await request.json();
+  const body = (await request.json()) as Record<string, unknown>;
   questions[index] = {
     ...questions[index],
     ...body,
     updatedAt: new Date().toISOString(),
-  };
+  } as typeof questions[0];
 
   return HttpResponse.json({ success: true, data: questions[index] });
 });
@@ -348,7 +348,7 @@ const postSyndrome = http.post(`${API_BASE}/syndromes`, async ({ request }) => {
   await delay(100);
   if (!checkAuth(request)) return unauthorizedResponse();
 
-  const body = await request.json();
+  const body = (await request.json()) as Record<string, unknown>;
   const newSyndrome = {
     id: `snd-${Date.now()}`,
     ...body,
@@ -356,7 +356,7 @@ const postSyndrome = http.post(`${API_BASE}/syndromes`, async ({ request }) => {
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   };
-  syndromes.push(newSyndrome);
+  syndromes.push(newSyndrome as typeof syndromes[0]);
 
   return HttpResponse.json({ success: true, data: newSyndrome }, { status: 201 });
 });
@@ -368,12 +368,12 @@ const putSyndrome = http.put(`${API_BASE}/syndromes/:id`, async ({ request, para
   const index = syndromes.findIndex((s) => s.id === params.id);
   if (index === -1) return notFoundResponse('변증');
 
-  const body = await request.json();
+  const body = (await request.json()) as Record<string, unknown>;
   syndromes[index] = {
     ...syndromes[index],
     ...body,
     updatedAt: new Date().toISOString(),
-  };
+  } as typeof syndromes[0];
 
   return HttpResponse.json({ success: true, data: syndromes[index] });
 });
@@ -430,7 +430,7 @@ const postHerb = http.post(`${API_BASE}/herbs`, async ({ request }) => {
   await delay(100);
   if (!checkAuth(request)) return unauthorizedResponse();
 
-  const body = await request.json();
+  const body = (await request.json()) as Record<string, unknown>;
   const newHerb = {
     id: `herb-${Date.now()}`,
     ...body,
@@ -438,7 +438,7 @@ const postHerb = http.post(`${API_BASE}/herbs`, async ({ request }) => {
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   };
-  herbs.push(newHerb);
+  herbs.push(newHerb as typeof herbs[0]);
 
   return HttpResponse.json({ success: true, data: newHerb }, { status: 201 });
 });
@@ -450,12 +450,12 @@ const putHerb = http.put(`${API_BASE}/herbs/:id`, async ({ request, params }) =>
   const index = herbs.findIndex((h) => h.id === params.id);
   if (index === -1) return notFoundResponse('약재');
 
-  const body = await request.json();
+  const body = (await request.json()) as Record<string, unknown>;
   herbs[index] = {
     ...herbs[index],
     ...body,
     updatedAt: new Date().toISOString(),
-  };
+  } as typeof herbs[0];
 
   return HttpResponse.json({ success: true, data: herbs[index] });
 });

@@ -2,20 +2,16 @@
  * 관리자 대시보드 페이지
  */
 
-import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { useAdminStore } from '../../stores/adminStore';
 import AdminNav from '../../components/admin/AdminNav';
-import DataTable from '../../components/admin/DataTable';
 import {
   getAdminSymptoms,
   getAdminQuestions,
   getAdminSyndromes,
   getAdminHerbs,
 } from '../../api/admin';
-
-type ResourceType = 'symptoms' | 'questions' | 'syndromes' | 'herbs';
 
 interface StatCard {
   label: string;
