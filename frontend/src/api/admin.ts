@@ -6,7 +6,8 @@ import axios from 'axios';
 import type { LoginResponse, PostAdminLogin } from '@contracts/admin.contract';
 import type { ApiResponse } from '@contracts/types';
 
-const API_BASE = '/api/admin';
+const API_URL = import.meta.env.VITE_API_URL || '';
+const API_BASE = `${API_URL}/api/admin`;
 
 /**
  * Axios 인스턴스 (관리자 API용)
