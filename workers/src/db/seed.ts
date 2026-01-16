@@ -21,9 +21,9 @@ export const seedData = {
     {
       id: nanoid(),
       username: 'admin',
-      // bcrypt hash of 'password123' (for development only!)
+      // PBKDF2 hash of 'password123' (for development only!)
       passwordHash:
-        '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy',
+        'N3XVCluIMK3CnRp-Z-xE4adIcXr9U4v87bWxZxejaiDhUnZ-mRQsccAQPnlfeFPL',
       createdAt: now(),
       updatedAt: now(),
     },
