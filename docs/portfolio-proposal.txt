@@ -1,0 +1,149 @@
+========================================
+한방진단 (Med-Herb) 프로젝트 제안서
+========================================
+
+
+1) 프로젝트 진행 제안
+----------------------------------------
+
+[작업 순서]
+
+Phase 0: 기획 및 설계
+  - PRD/TRD 문서 작성
+  - 사용자 흐름도 설계
+  - 데이터베이스 스키마 설계
+  - 디자인 시스템 정의
+  - API 계약(Contract) 정의
+
+Phase 1: 인프라 및 기반 구축
+  - 프로젝트 초기 설정 (monorepo 구조)
+  - Cloudflare Workers + D1 환경 구성
+  - React + Vite 프론트엔드 환경 구성
+  - CI/CD 파이프라인 구축
+  - 테스트 환경 설정 (Vitest, Playwright, MSW)
+
+Phase 2: 백엔드 개발
+  - 데이터베이스 마이그레이션 및 시드 데이터
+  - 공개 API 개발 (증상, 질문, 진단)
+  - 관리자 API 개발 (인증, CRUD)
+  - API 단위 테스트 작성
+
+Phase 3: 프론트엔드 개발
+  - 공통 컴포넌트 개발 (디자인 시스템 적용)
+  - 사용자 페이지 개발 (진단 흐름)
+  - 관리자 페이지 개발 (대시보드, CRUD)
+  - 컴포넌트 단위 테스트 작성
+
+Phase 4: 통합 및 테스트
+  - Frontend-Backend 통합
+  - E2E 테스트 작성 및 실행
+  - 성능 테스트 및 최적화
+  - 버그 수정
+
+Phase 5: 배포 및 검증
+  - Cloudflare Pages/Workers 배포
+  - 프로덕션 환경 테스트
+  - 문서화 완료
+
+
+
+2) 유사 프로젝트 진행 경험
+----------------------------------------
+
+[한방진단 데모 버전 제작 경험]
+
+본 프로젝트는 한의학 자가진단 서비스의 시장 검증을 위한 MVP 데모 버전으로,
+직접 기획부터 배포까지 전 과정을 수행하였습니다.
+
+[수행 내용]
+
+1. 기획 단계
+   - PRD(제품 요구사항) 문서 작성
+   - 페르소나 정의 및 사용자 시나리오 설계
+   - 핵심 지표(노스스타) 설정: 진단 완료율 70%
+
+2. 설계 단계
+   - TRD(기술 요구사항) 문서 작성
+   - 시스템 아키텍처 설계 (Cloudflare 풀스택)
+   - 데이터베이스 ERD 설계
+   - API 계약 정의 (Contract-First)
+   - 디자인 시스템 정의 (색상, 타이포그래피, 컴포넌트)
+
+3. 개발 단계
+   - Backend: Hono 프레임워크로 RESTful API 구현
+   - Frontend: React + TypeScript로 SPA 개발
+   - Database: Drizzle ORM으로 D1 연동
+   - Auth: JWT 기반 관리자 인증 구현
+   - Testing: TDD 방식으로 테스트 선작성
+
+4. 배포 단계
+   - Cloudflare Pages에 Frontend 배포
+   - Cloudflare Workers에 Backend 배포
+   - D1 데이터베이스 프로덕션 설정
+   - CORS 및 환경변수 설정
+
+[성과]
+- API 응답 속도: 평균 0.51초 (목표 3초 대비 83% 개선)
+- 전체 사용자 흐름 구현 완료
+- 관리자 CRUD 기능 구현 완료
+- E2E 테스트 통과
+
+
+3) 사용 기술과 툴
+----------------------------------------
+
+[개발 기술]
+
+Frontend
+  - React 19 (UI 라이브러리)
+  - TypeScript (타입 안전성)
+  - Vite (빌드 도구)
+  - TailwindCSS (스타일링)
+  - Zustand (상태 관리)
+  - TanStack Query (서버 상태 관리)
+  - Axios (HTTP 클라이언트)
+  - React Router (라우팅)
+
+Backend
+  - Cloudflare Workers (엣지 서버리스)
+  - Hono (웹 프레임워크)
+  - TypeScript (타입 안전성)
+  - Drizzle ORM (데이터베이스 ORM)
+  - Zod (스키마 검증)
+  - jose (JWT 처리)
+
+Database
+  - Cloudflare D1 (SQLite 기반)
+
+[테스트 도구]
+
+  - Vitest (단위/통합 테스트)
+  - Playwright (E2E 테스트)
+  - MSW (API 모킹)
+  - React Testing Library (컴포넌트 테스트)
+
+[개발 도구]
+
+  - VS Code (코드 에디터)
+  - Claude Code (AI 코딩 어시스턴트)
+  - ESLint (코드 린팅)
+  - Prettier (코드 포맷팅)
+  - Git (버전 관리)
+
+[인프라/배포]
+
+  - Cloudflare Pages (Frontend 호스팅)
+  - Cloudflare Workers (Backend 호스팅)
+  - Cloudflare D1 (Database)
+  - GitHub (소스 코드 저장소)
+  - Wrangler CLI (Cloudflare 배포 도구)
+
+[커뮤니케이션/협업]
+
+  - GitHub Issues (이슈 트래킹)
+  - Markdown 문서 (기획/기술 문서)
+
+
+========================================
+End of Proposal
+========================================
