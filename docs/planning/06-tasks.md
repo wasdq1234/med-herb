@@ -38,7 +38,7 @@
 
 ## M0: 프로젝트 셋업
 
-### [ ] Phase 0, T0.1: 프로젝트 초기화
+### [x] Phase 0, T0.1: 프로젝트 초기화
 
 **담당**: frontend-specialist
 
@@ -63,7 +63,7 @@
 
 ---
 
-### [ ] Phase 0, T0.2: Frontend 개발 환경 설정
+### [x] Phase 0, T0.2: Frontend 개발 환경 설정
 
 **담당**: frontend-specialist
 
@@ -89,7 +89,7 @@
 
 ---
 
-### [ ] Phase 0, T0.3: Workers 개발 환경 설정
+### [x] Phase 0, T0.3: Workers 개발 환경 설정
 
 **담당**: backend-specialist
 

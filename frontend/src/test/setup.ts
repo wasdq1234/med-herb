@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom';
+import { server } from '../mocks/server';
 
-// MSW 설정 (필요시)
-// import { server } from './mocks/server';
-// beforeAll(() => server.listen());
-// afterEach(() => server.resetHandlers());
-// afterAll(() => server.close());
+// MSW 서버 설정
+beforeAll(() => server.listen({ onUnhandledRequest: 'warn' }));
+afterEach(() => server.resetHandlers());
+afterAll(() => server.close());

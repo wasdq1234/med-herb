@@ -1,0 +1,11 @@
+{
+  "name": "med-herb-contracts",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "schemas/index.ts",
+  "types": "schemas/index.ts",
+  "dependencies": {
+    "zod": "^3.22.0"
+  }
+}

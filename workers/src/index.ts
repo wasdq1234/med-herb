@@ -1,6 +1,5 @@
 import { Hono } from 'hono';
 import { cors } from 'hono/cors';
-import { logger } from 'hono/logger';
 import { prettyJSON } from 'hono/pretty-json';
 
 import type { Env } from './types';
@@ -8,7 +7,6 @@ import type { Env } from './types';
 const app = new Hono<{ Bindings: Env }>();
 
 // 미들웨어
-app.use('*', logger());
 app.use('*', prettyJSON());
 app.use(
   '*',
@@ -17,7 +15,7 @@ app.use(
     allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
-  })
+  }),
 );
 
 // 헬스 체크
@@ -52,7 +50,7 @@ app.onError((err, c) => {
       error: 'Internal Server Error',
       message: process.env.NODE_ENV === 'development' ? err.message : '서버 오류가 발생했습니다.',
     },
-    500
+    500,
   );
 });
 
