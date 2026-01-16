@@ -14,6 +14,14 @@ export const ApiErrorSchema = z.object({
   success: z.literal(false),
   error: z.string(),
   message: z.string().optional(),
+  details: z
+    .array(
+      z.object({
+        field: z.string(),
+        message: z.string(),
+      })
+    )
+    .optional(),
 });
 
 export type ApiError = z.infer<typeof ApiErrorSchema>;
@@ -32,3 +40,14 @@ export const PaginationSchema = z.object({
 });
 
 export type Pagination = z.infer<typeof PaginationSchema>;
+
+export const PaginatedResponseSchema = <T extends z.ZodTypeAny>(itemSchema: T) =>
+  z.object({
+    items: z.array(itemSchema),
+    pagination: PaginationSchema,
+  });
+
+export const PaginationQuerySchema = z.object({
+  page: z.number().int().positive().optional().default(1),
+  limit: z.number().int().positive().max(100).optional().default(20),
+});
