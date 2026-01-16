@@ -1,0 +1,31 @@
+{
+  "name": "med-herb",
+  "version": "0.1.0",
+  "private": true,
+  "description": "한방진단 - 한의학 기반 증상 진단 및 치료 추천 서비스",
+  "scripts": {
+    "dev": "concurrently \"npm run dev:workers\" \"npm run dev:frontend\"",
+    "dev:workers": "cd workers && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "build": "npm run build:workers && npm run build:frontend",
+    "build:workers": "cd workers && npm run build",
+    "build:frontend": "cd frontend && npm run build",
+    "test": "npm run test:workers && npm run test:frontend",
+    "test:workers": "cd workers && npm run test",
+    "test:frontend": "cd frontend && npm run test",
+    "test:e2e": "playwright test",
+    "lint": "npm run lint:workers && npm run lint:frontend",
+    "lint:workers": "cd workers && npm run lint",
+    "lint:frontend": "cd frontend && npm run lint",
+    "db:generate": "cd workers && npm run db:generate",
+    "db:migrate": "cd workers && npm run db:migrate",
+    "deploy": "cd workers && npm run deploy"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.40.0",
+    "concurrently": "^8.2.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

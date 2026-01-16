@@ -1,0 +1,28 @@
+name = "med-herb-api"
+main = "src/index.ts"
+compatibility_date = "2024-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+# 개발 환경 설정
+[dev]
+port = 8787
+
+# D1 Database 바인딩
+[[d1_databases]]
+binding = "DB"
+database_name = "med-herb-db"
+database_id = "YOUR_DATABASE_ID"
+
+# KV Namespace (세션/캐시용)
+# [[kv_namespaces]]
+# binding = "SESSION_KV"
+# id = "YOUR_KV_ID"
+
+# 환경별 설정
+[env.production]
+name = "med-herb-api"
+
+[env.staging]
+name = "med-herb-api-staging"
+
+# CORS 설정은 Hono 미들웨어에서 처리
