@@ -202,4 +202,44 @@ main 브랜치에 병합할까요?
 
 ---
 
+## 태스크 완료 체크 (필수!)
+
+태스크가 완료되면 **반드시** `docs/planning/06-tasks.md` 파일의 해당 태스크를 체크 표시합니다.
+
+### 체크 방법
+
+`06-tasks.md` 파일에서 완료된 태스크의 `[ ]`를 `[x]`로 변경합니다:
+
+```markdown
+# 변경 전
+### [ ] Phase 0, T0.1: Cloudflare D1 데이터베이스 생성
+
+# 변경 후
+### [x] Phase 0, T0.1: Cloudflare D1 데이터베이스 생성
+```
+
+### 체크 시점
+
+다음 조건이 **모두** 충족되면 태스크를 완료 처리합니다:
+
+1. 서브에이전트가 작업 완료 보고
+2. 테스트 통과 확인 (Phase 1+ 의 경우 GREEN 상태)
+3. 사용자가 병합 승인 (Phase 1+ 의 경우)
+4. main 브랜치에 병합 완료 (Phase 1+ 의 경우)
+
+### 체크 명령어
+
+Edit 도구를 사용하여 `docs/planning/06-tasks.md` 파일을 수정합니다:
+
+```
+Edit tool parameters:
+- file_path: "docs/planning/06-tasks.md"
+- old_string: "### [ ] Phase {N}, T{N.X}: {태스크명}"
+- new_string: "### [x] Phase {N}, T{N.X}: {태스크명}"
+```
+
+**주의**: 태스크 완료 체크는 모든 완료 조건이 충족된 후에만 수행합니다!
+
+---
+
 $ARGUMENTS를 분석하여 적절한 전문가 에이전트를 호출하세요.
