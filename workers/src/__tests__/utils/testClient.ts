@@ -10,6 +10,12 @@
 import type { Env } from '../../types';
 
 /**
+ * API 응답 타입 (테스트용)
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type ApiResponse = any;
+
+/**
  * 테스트용 관리자 인증 토큰 생성
  *
  * 실제 구현 시 JWT를 사용하지만, 테스트에서는 고정된 토큰 사용

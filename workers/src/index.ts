@@ -3,6 +3,8 @@ import { cors } from 'hono/cors';
 import { prettyJSON } from 'hono/pretty-json';
 
 import type { Env } from './types';
+import adminRouter from './routes/admin';
+import diagnosisRouter from './routes/diagnosis';
 
 const app = new Hono<{ Bindings: Env }>();
 
@@ -32,10 +34,11 @@ app.get('/api/v1', (c) => {
   });
 });
 
-// TODO: 라우트 추가
-// app.route('/api/v1/symptoms', symptomsRoute);
-// app.route('/api/v1/diagnosis', diagnosisRoute);
-// app.route('/api/v1/admin', adminRoute);
+// 관리자 라우트
+app.route('/api/admin', adminRouter);
+
+// 진단 라우트
+app.route('/api', diagnosisRouter);
 
 // 404 핸들러
 app.notFound((c) => {

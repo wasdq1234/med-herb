@@ -22,6 +22,7 @@ import {
   mockQuestions,
   mockSyndromes,
   mockHerbs,
+  type ApiResponse,
 } from './utils/testClient';
 
 describe('Admin API', () => {
@@ -40,7 +41,7 @@ describe('Admin API', () => {
 
       expect(response.status).toBe(200);
 
-      const data = await response.json();
+      const data = await response.json() as ApiResponse;
       expect(data).toHaveProperty('success', true);
       expect(data.data).toHaveProperty('admin');
       expect(data.data).toHaveProperty('accessToken');
@@ -63,7 +64,7 @@ describe('Admin API', () => {
 
       expect(response.status).toBe(401);
 
-      const data = await response.json();
+      const data = await response.json() as ApiResponse;
       expect(data).toHaveProperty('success', false);
       expect(data).toHaveProperty('error');
     });
@@ -82,7 +83,7 @@ describe('Admin API', () => {
 
       expect(response.status).toBe(401);
 
-      const data = await response.json();
+      const data = await response.json() as ApiResponse;
       expect(data).toHaveProperty('success', false);
       expect(data).toHaveProperty('error');
     });
@@ -98,7 +99,7 @@ describe('Admin API', () => {
 
       expect(response.status).toBe(400);
 
-      const data = await response.json();
+      const data = await response.json() as ApiResponse;
       expect(data).toHaveProperty('success', false);
       expect(data).toHaveProperty('error');
     });
@@ -110,7 +111,7 @@ describe('Admin API', () => {
 
       expect(response.status).toBe(401);
 
-      const data = await response.json();
+      const data = await response.json() as ApiResponse;
       expect(data).toHaveProperty('success', false);
       expect(data).toHaveProperty('error');
     });
@@ -124,7 +125,7 @@ describe('Admin API', () => {
 
       expect(response.status).toBe(401);
 
-      const data = await response.json();
+      const data = await response.json() as ApiResponse;
       expect(data).toHaveProperty('success', false);
       expect(data).toHaveProperty('error');
     });
@@ -154,7 +155,7 @@ describe('Admin API', () => {
 
         expect(response.status).toBe(200);
 
-        const data = await response.json();
+        const data = await response.json() as ApiResponse;
         expect(data).toHaveProperty('success', true);
         expect(data.data).toHaveProperty('items');
         expect(data.data).toHaveProperty('pagination');
@@ -171,7 +172,7 @@ describe('Admin API', () => {
 
         expect(response.status).toBe(200);
 
-        const data = await response.json();
+        const data = await response.json() as ApiResponse;
         expect(data.data.pagination.page).toBe(2);
         expect(data.data.pagination.limit).toBe(10);
       });
@@ -186,7 +187,7 @@ describe('Admin API', () => {
 
         expect(response.status).toBe(200);
 
-        const data = await response.json();
+        const data = await response.json() as ApiResponse;
         if (data.data?.items && data.data.items.length > 0) {
           data.data.items.forEach((item: any) => {
             expect(item.isActive).toBe(true);
@@ -207,7 +208,7 @@ describe('Admin API', () => {
 
         expect(response.status).toBe(200);
 
-        const data = await response.json();
+        const data = await response.json() as ApiResponse;
         expect(data).toHaveProperty('success', true);
         expect(data.data).toHaveProperty('id', symptomId);
       });
@@ -222,7 +223,7 @@ describe('Admin API', () => {
 
         expect(response.status).toBe(404);
 
-        const data = await response.json();
+        const data = await response.json() as ApiResponse;
         expect(data).toHaveProperty('success', false);
       });
     });
@@ -249,7 +250,7 @@ describe('Admin API', () => {
 
         expect(response.status).toBe(201);
 
-        const data = await response.json();
+        const data = await response.json() as ApiResponse;
         expect(data).toHaveProperty('success', true);
         expect(data.data).toHaveProperty('id');
         expect(data.data).toHaveProperty('name', newSymptom.name);
@@ -273,7 +274,7 @@ describe('Admin API', () => {
 
         expect(response.status).toBe(400);
 
-        const data = await response.json();
+        const data = await response.json() as ApiResponse;
         expect(data).toHaveProperty('success', false);
         expect(data).toHaveProperty('error');
       });
@@ -299,7 +300,7 @@ describe('Admin API', () => {
 
         expect(response.status).toBe(200);
 
-        const data = await response.json();
+        const data = await response.json() as ApiResponse;
         expect(data).toHaveProperty('success', true);
         expect(data.data).toHaveProperty('id', symptomId);
         expect(data.data.name).toBe(updateData.name);
@@ -323,7 +324,8 @@ describe('Admin API', () => {
     describe('DELETE /api/admin/symptoms/:id', () => {
       it('should delete symptom', async () => {
         const authToken = createAuthToken();
-        const symptomId = mockSymptoms[0].id;
+        // symptom-2는 FK 참조가 없어서 삭제 가능
+        const symptomId = mockSymptoms[1].id;
 
         const response = await app.request(`/api/admin/symptoms/${symptomId}`, {
           method: 'DELETE',
@@ -334,7 +336,7 @@ describe('Admin API', () => {
 
         expect(response.status).toBe(200);
 
-        const data = await response.json();
+        const data = await response.json() as ApiResponse;
         expect(data).toHaveProperty('success', true);
         expect(data.data).toHaveProperty('message');
       });
@@ -365,7 +367,7 @@ describe('Admin API', () => {
 
         expect(response.status).toBe(200);
 
-        const data = await response.json();
+        const data = await response.json() as ApiResponse;
         expect(data).toHaveProperty('success', true);
         expect(data.data).toHaveProperty('items');
         expect(data.data).toHaveProperty('pagination');
@@ -382,7 +384,7 @@ describe('Admin API', () => {
 
         expect(response.status).toBe(200);
 
-        const data = await response.json();
+        const data = await response.json() as ApiResponse;
         if (data.data?.items && data.data.items.length > 0) {
           data.data.items.forEach((item: any) => {
             expect([null, symptomId]).toContain(item.symptomId);
@@ -416,7 +418,7 @@ describe('Admin API', () => {
 
         expect(response.status).toBe(201);
 
-        const data = await response.json();
+        const data = await response.json() as ApiResponse;
         expect(data).toHaveProperty('success', true);
         expect(data.data).toHaveProperty('id');
         expect(data.data.questionType).toBe('radio');
@@ -444,7 +446,7 @@ describe('Admin API', () => {
 
         expect(response.status).toBe(201);
 
-        const data = await response.json();
+        const data = await response.json() as ApiResponse;
         expect(data).toHaveProperty('success', true);
         expect(data.data.questionType).toBe('slider');
       });
@@ -505,7 +507,7 @@ describe('Admin API', () => {
 
         expect(response.status).toBe(200);
 
-        const data = await response.json();
+        const data = await response.json() as ApiResponse;
         expect(data).toHaveProperty('success', true);
         expect(data.data).toHaveProperty('items');
         expect(data.data).toHaveProperty('pagination');
@@ -533,7 +535,7 @@ describe('Admin API', () => {
 
         expect(response.status).toBe(201);
 
-        const data = await response.json();
+        const data = await response.json() as ApiResponse;
         expect(data).toHaveProperty('success', true);
         expect(data.data).toHaveProperty('id');
         expect(data.data.name).toBe(newSyndrome.name);
@@ -578,7 +580,7 @@ describe('Admin API', () => {
 
         expect(response.status).toBe(200);
 
-        const data = await response.json();
+        const data = await response.json() as ApiResponse;
         expect(data.data.name).toBe(updateData.name);
       });
     });
@@ -612,7 +614,7 @@ describe('Admin API', () => {
 
         expect(response.status).toBe(200);
 
-        const data = await response.json();
+        const data = await response.json() as ApiResponse;
         expect(data).toHaveProperty('success', true);
         expect(data.data).toHaveProperty('items');
         expect(data.data).toHaveProperty('pagination');
@@ -640,7 +642,7 @@ describe('Admin API', () => {
 
         expect(response.status).toBe(201);
 
-        const data = await response.json();
+        const data = await response.json() as ApiResponse;
         expect(data).toHaveProperty('success', true);
         expect(data.data).toHaveProperty('id');
         expect(data.data.name).toBe(newHerb.name);
@@ -685,7 +687,7 @@ describe('Admin API', () => {
 
         expect(response.status).toBe(200);
 
-        const data = await response.json();
+        const data = await response.json() as ApiResponse;
         expect(data.data.name).toBe(updateData.name);
       });
     });

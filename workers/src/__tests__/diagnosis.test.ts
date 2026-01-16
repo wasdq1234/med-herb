@@ -14,7 +14,7 @@
 import { env } from 'cloudflare:test';
 import { describe, it, expect } from 'vitest';
 import app from '../index';
-import { mockSymptoms, mockQuestions, mockDiagnosisRequest } from './utils/testClient';
+import { mockSymptoms, mockQuestions, mockDiagnosisRequest, type ApiResponse } from './utils/testClient';
 
 describe('Diagnosis API', () => {
   describe('GET /api/symptoms', () => {
@@ -23,7 +23,7 @@ describe('Diagnosis API', () => {
 
       expect(response.status).toBe(200);
 
-      const data = await response.json();
+      const data = await response.json() as ApiResponse;
       expect(data).toHaveProperty('success', true);
       expect(data).toHaveProperty('data');
       expect(Array.isArray(data.data)).toBe(true);
@@ -34,7 +34,7 @@ describe('Diagnosis API', () => {
 
       expect(response.status).toBe(200);
 
-      const data = await response.json();
+      const data = await response.json() as ApiResponse;
       expect(data).toHaveProperty('success', true);
       expect(data).toHaveProperty('data');
 
@@ -51,7 +51,7 @@ describe('Diagnosis API', () => {
 
       expect(response.status).toBe(200);
 
-      const data = await response.json();
+      const data = await response.json() as ApiResponse;
 
       // 모든 증상이 활성 상태인지 검증
       if (data.data && data.data.length > 0) {
@@ -66,7 +66,7 @@ describe('Diagnosis API', () => {
 
       expect(response.status).toBe(200);
 
-      const data = await response.json();
+      const data = await response.json() as ApiResponse;
 
       // displayOrder 정렬 검증
       if (data.data && data.data.length > 1) {
@@ -83,7 +83,7 @@ describe('Diagnosis API', () => {
 
       expect(response.status).toBe(200);
 
-      const data = await response.json();
+      const data = await response.json() as ApiResponse;
       expect(data).toHaveProperty('success', true);
       expect(data).toHaveProperty('data');
       expect(Array.isArray(data.data)).toBe(true);
@@ -95,7 +95,7 @@ describe('Diagnosis API', () => {
 
       expect(response.status).toBe(200);
 
-      const data = await response.json();
+      const data = await response.json() as ApiResponse;
       expect(data).toHaveProperty('success', true);
       expect(data).toHaveProperty('data');
 
@@ -113,7 +113,7 @@ describe('Diagnosis API', () => {
 
       expect(response.status).toBe(200);
 
-      const data = await response.json();
+      const data = await response.json() as ApiResponse;
 
       // 모든 질문이 활성 상태인지 검증
       if (data.data && data.data.length > 0) {
@@ -128,7 +128,7 @@ describe('Diagnosis API', () => {
 
       expect(response.status).toBe(200);
 
-      const data = await response.json();
+      const data = await response.json() as ApiResponse;
 
       // displayOrder 정렬 검증
       if (data.data && data.data.length > 1) {
@@ -143,7 +143,7 @@ describe('Diagnosis API', () => {
 
       expect(response.status).toBe(200);
 
-      const data = await response.json();
+      const data = await response.json() as ApiResponse;
 
       // radio 타입 질문은 options를 가져야 함
       const radioQuestions = data.data?.filter((q: any) => q.questionType === 'radio') || [];
@@ -159,7 +159,7 @@ describe('Diagnosis API', () => {
 
       expect(response.status).toBe(200);
 
-      const data = await response.json();
+      const data = await response.json() as ApiResponse;
 
       // slider 타입 질문은 sliderMin, sliderMax를 가져야 함
       const sliderQuestions = data.data?.filter((q: any) => q.questionType === 'slider') || [];
@@ -183,7 +183,7 @@ describe('Diagnosis API', () => {
 
       expect(response.status).toBe(200);
 
-      const data = await response.json();
+      const data = await response.json() as ApiResponse;
       expect(data).toHaveProperty('success', true);
       expect(data).toHaveProperty('data');
       expect(data.data).toHaveProperty('sessionId');
@@ -209,7 +209,7 @@ describe('Diagnosis API', () => {
 
       expect(response.status).toBe(400);
 
-      const data = await response.json();
+      const data = await response.json() as ApiResponse;
       expect(data).toHaveProperty('success', false);
       expect(data).toHaveProperty('error');
     });
@@ -232,7 +232,7 @@ describe('Diagnosis API', () => {
 
       expect(response.status).toBe(400);
 
-      const data = await response.json();
+      const data = await response.json() as ApiResponse;
       expect(data).toHaveProperty('success', false);
       expect(data).toHaveProperty('error');
     });
@@ -248,7 +248,7 @@ describe('Diagnosis API', () => {
 
       expect(response.status).toBe(200);
 
-      const data = await response.json();
+      const data = await response.json() as ApiResponse;
 
       // 변증 결과 검증
       if (data.data?.syndromes && data.data.syndromes.length > 0) {
@@ -275,7 +275,7 @@ describe('Diagnosis API', () => {
 
       expect(response.status).toBe(200);
 
-      const data = await response.json();
+      const data = await response.json() as ApiResponse;
 
       // 약재 추천 검증
       if (data.data?.herbs && data.data.herbs.length > 0) {
@@ -299,13 +299,74 @@ describe('Diagnosis API', () => {
 
       expect(response.status).toBe(200);
 
-      const data = await response.json();
+      const data = await response.json() as ApiResponse;
 
       // 치료축 검증
       if (data.data?.treatmentAxes && data.data.treatmentAxes.length > 0) {
         data.data.treatmentAxes.forEach((axis: any) => {
           expect(axis).toHaveProperty('id');
           expect(axis).toHaveProperty('name');
+        });
+      }
+    });
+
+    it('should return at most 3 treatment axes', async () => {
+      const response = await app.request('/api/diagnosis', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(mockDiagnosisRequest),
+      }, env);
+
+      expect(response.status).toBe(200);
+
+      const data = await response.json() as ApiResponse;
+
+      // 치료축 최대 3개 검증
+      expect(data.data?.treatmentAxes?.length || 0).toBeLessThanOrEqual(3);
+    });
+
+    it('should return at most 5 herbs prioritized by relevance', async () => {
+      const response = await app.request('/api/diagnosis', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(mockDiagnosisRequest),
+      }, env);
+
+      expect(response.status).toBe(200);
+
+      const data = await response.json() as ApiResponse;
+
+      // 약재 최대 5개 검증
+      expect(data.data?.herbs?.length || 0).toBeLessThanOrEqual(5);
+
+      // 우선순위 정렬 검증 (relevanceScore 내림차순)
+      const herbs = data.data?.herbs || [];
+      for (let i = 0; i < herbs.length - 1; i++) {
+        expect(herbs[i].relevanceScore).toBeGreaterThanOrEqual(herbs[i + 1].relevanceScore);
+      }
+    });
+
+    it('should include reference URL in herbs', async () => {
+      const response = await app.request('/api/diagnosis', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(mockDiagnosisRequest),
+      }, env);
+
+      expect(response.status).toBe(200);
+
+      const data = await response.json() as ApiResponse;
+
+      // 약재에 referenceUrl 필드 포함 검증
+      if (data.data?.herbs && data.data.herbs.length > 0) {
+        data.data.herbs.forEach((herb: any) => {
+          expect(herb).toHaveProperty('referenceUrl');
         });
       }
     });
@@ -330,8 +391,8 @@ describe('Diagnosis API', () => {
       expect(response1.status).toBe(200);
       expect(response2.status).toBe(200);
 
-      const data1 = await response1.json();
-      const data2 = await response2.json();
+      const data1 = await response1.json() as ApiResponse;
+      const data2 = await response2.json() as ApiResponse;
 
       // 세션 ID는 매번 달라야 함
       expect(data1.data?.sessionId).not.toBe(data2.data?.sessionId);
