@@ -13,7 +13,11 @@ app.use('*', prettyJSON());
 app.use(
   '*',
   cors({
-    origin: ['http://localhost:5173', 'https://med-herb.pages.dev'],
+    origin: [
+      'http://localhost:5173',
+      'https://med-herb.pages.dev',
+      'https://med-herb-frontend.pages.dev',
+    ],
     allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
