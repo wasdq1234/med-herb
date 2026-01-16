@@ -136,7 +136,7 @@
 
 ## M0.5: 계약 & 테스트 정의 (Contract-First)
 
-### [ ] Phase 0, T0.5.1: API 계약 정의
+### [x] Phase 0, T0.5.1: API 계약 정의
 
 **담당**: backend-specialist
 
