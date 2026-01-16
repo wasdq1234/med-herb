@@ -12,6 +12,7 @@ port = 8787
 binding = "DB"
 database_name = "med-herb-db"
 database_id = "YOUR_DATABASE_ID"
+migrations_dir = "drizzle/migrations"
 
 # KV Namespace (세션/캐시용)
 # [[kv_namespaces]]

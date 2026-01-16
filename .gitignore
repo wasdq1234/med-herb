@@ -18,6 +18,7 @@ build/
 
 # Cloudflare
 .wrangler/
+workers/wrangler.toml
 
 # Editor directories and files
 .idea/
